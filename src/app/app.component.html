@@ -1,26 +1,19 @@
-<div class="page-wrapper">
-
-  <!-- MENU SIDEBAR-->
-  <app-sidebar></app-sidebar>
-  <!-- END MENU SIDEBAR-->
-
-  <!-- PAGE CONTAINER-->
-  <div class="page-container">
-    <!-- HEADER DESKTOP-->
-    <app-header></app-header>
-
-    <!-- HEADER DESKTOP-->
-
-    <!-- MAIN CONTENT-->
-    <div class="main-content">
-      <div class="section__content section__content--p30">
-        <div class="container-fluid">
-          <router-outlet></router-outlet>
-          <app-footer></app-footer>
+<ng-template [ngIf]="isAuthanticated">
+    <div class="page-wrapper">
+        <app-sidebar></app-sidebar>
+        <div class="page-container">
+            <app-header></app-header>
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <router-outlet></router-outlet>
+                        <app-footer></app-footer>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-    <!-- END MAIN CONTENT-->
-    <!-- END PAGE CONTAINER-->
-  </div>
-</div>
+</ng-template>
+<ng-template [ngIf]="!isAuthanticated">
+    <router-outlet></router-outlet>
+</ng-template>

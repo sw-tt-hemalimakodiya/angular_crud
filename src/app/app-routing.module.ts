@@ -5,9 +5,11 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StockComponent } from './components/stock/stock.component';
 import { MutualFundsComponent } from './components/mutual-funds/mutual-funds.component';
 import { authGuard } from './auth/auth.guard';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent},
+  { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
   { path: 'stocks', component: StockComponent, canActivate:[authGuard]},
   { path: 'mutual-funds', component: MutualFundsComponent, canActivate:[authGuard]},

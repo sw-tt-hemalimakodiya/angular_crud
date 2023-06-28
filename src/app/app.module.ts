@@ -10,6 +10,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StockComponent } from './components/stock/stock.component';
 import { MutualFundsComponent } from './components/mutual-funds/mutual-funds.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MutualFundsComponent } from './components/mutual-funds/mutual-funds.com
     LoginComponent,
     DashboardComponent,
     StockComponent,
-    MutualFundsComponent
+    MutualFundsComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
