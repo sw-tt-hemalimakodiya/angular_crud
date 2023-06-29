@@ -9,18 +9,30 @@
                         </a>
                     </div>
                     <div class="login-form">
-                        <form [formGroup]="registerForm" (ngSubmit)="register()" method="post">
+                        <form [formGroup]="registerForm" (ngSubmit)="register()" novalidate method="post">
                             <div class="form-group">
                                 <label>Username</label>
-                                <input class="au-input au-input--full" type="text" name="username" placeholder="Username">
+                                <input class="au-input au-input--full" type="text" formControlName="username" placeholder="Username">
+                                <div class="error-message" *ngIf="getElements('username')?.invalid && getElements('username')?.touched">
+                                    <span *ngIf="hasFormError('username', 'required')"> Please enter name. </span>
+                                    <span *ngIf="hasFormError('username', 'pattern')"> Please enter valid name. </span>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Email Address</label>
-                                <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
+                                <input class="au-input au-input--full" type="email" formControlName="email" placeholder="Email">
+                                <div class="error-message" *ngIf="getElements('email')?.invalid && getElements('email')?.touched">
+                                    <span *ngIf="hasFormError('email', 'required')"> Please enter email. </span>
+                                    <span *ngIf="hasFormError('email', 'email')"> Please enter valid email. </span>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+                                <input class="au-input au-input--full" type="password" formControlName="password" placeholder="Password">
+                                <div class="error-message" *ngIf="getElements('password')?.invalid && getElements('password')?.touched">
+                                    <span *ngIf="hasFormError('password', 'required')"> Please enter password. </span>
+                                    <span *ngIf="hasFormError('password', 'pattern')"> Please enter valid password. </span>
+                                </div>
                             </div>
                             <button class="au-btn au-btn--block au-btn--green m-t-20" type="submit">register</button>
                         </form>

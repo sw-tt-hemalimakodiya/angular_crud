@@ -14645,3 +14645,8 @@ section {
 .vue-lists ul, .vue-lists ol {
     padding-left: 30px;
 }
+
+.error-message{
+    font-size: 13px;
+    color: #c51313;
+}
