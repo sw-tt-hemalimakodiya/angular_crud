@@ -4,13 +4,13 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { StockComponent } from './components/stock/stock.component';
 import { MutualFundsComponent } from './components/mutual-funds/mutual-funds.component';
-import { authGuard } from './auth/auth.guard';
+import { authGuard, notAuthGuard } from './auth/auth.guard';
 import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent},
-  { path: 'register', component: RegisterComponent},
-  { path: 'login', component: LoginComponent},
+  { path: '', component: DashboardComponent,canActivate:[authGuard]},
+  { path: 'register', component: RegisterComponent, canActivate:[notAuthGuard]},
+  { path: 'login', component: LoginComponent, canActivate:[notAuthGuard]},
   { path: 'stocks', component: StockComponent, canActivate:[authGuard]},
   { path: 'mutual-funds', component: MutualFundsComponent, canActivate:[authGuard]},
 ];
