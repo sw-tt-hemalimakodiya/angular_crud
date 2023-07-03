@@ -14650,3 +14650,8 @@ section {
     font-size: 13px;
     color: #c51313;
 }
+
+.disabled {
+    opacity: 0.7;
+    cursor: default;
+}

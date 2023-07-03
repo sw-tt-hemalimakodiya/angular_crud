@@ -10,7 +10,7 @@
                     </div>
                     <div class="login-form">
                         <form [formGroup]="registerForm" (ngSubmit)="register()" novalidate method="post">
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label>Username</label>
                                 <input class="au-input au-input--full" type="text" formControlName="username" placeholder="Username">
                                 <div class="error-message" *ngIf="getElements('username')?.invalid && getElements('username')?.touched">
@@ -18,7 +18,7 @@
                                     <span *ngIf="hasFormError('username', 'pattern')"> Please enter valid name. </span>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label>Email Address</label>
                                 <input class="au-input au-input--full" type="email" formControlName="email" placeholder="Email">
                                 <div class="error-message" *ngIf="getElements('email')?.invalid && getElements('email')?.touched">
@@ -26,7 +26,7 @@
                                     <span *ngIf="hasFormError('email', 'email')"> Please enter valid email. </span>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label>Password</label>
                                 <input class="au-input au-input--full" type="password" formControlName="password" placeholder="Password">
                                 <div class="error-message" *ngIf="getElements('password')?.invalid && getElements('password')?.touched">
@@ -34,7 +34,7 @@
                                     <span *ngIf="hasFormError('password', 'pattern')"> Please enter valid password. </span>
                                 </div>
                             </div>
-                            <button class="au-btn au-btn--block au-btn--green m-t-20" type="submit">register</button>
+                            <button class="au-btn au-btn--block au-btn--green m-t-20 {{!registerForm.valid ? 'disabled' : ''}}" [disabled]="!registerForm.valid" type="submit">register</button>
                         </form>
                         <div class="register-link">
                             <p>
