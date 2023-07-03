@@ -6,8 +6,8 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot,
 	state: RouterStateSnapshot) => {
 	const authService = inject(AuthService);
 	const router = inject(Router);
-	//const isAuthenticated: boolean = authService.IsAuthenticated();
-	const isAuthenticated: boolean = false;
+	const isAuthenticated: boolean = authService.IsAuthenticated();
+	//const isAuthenticated: boolean = false;
 
 	if (!isAuthenticated) {
 		alert("Plz login first")
@@ -20,8 +20,8 @@ export const notAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot,
 	state: RouterStateSnapshot) => {
 	const authService = inject(AuthService);
 	const router = inject(Router);
-	//const isAuthenticated: boolean = authService.IsAuthenticated();
-	const isAuthenticated: boolean = false;
+	const isAuthenticated: boolean = authService.IsAuthenticated();
+	//const isAuthenticated: boolean = false;
 	if (isAuthenticated) {
 		router.navigate(['/']);
 	}

@@ -14,13 +14,13 @@ export class AuthService {
   }
 
   register(payload: any, cb: any) {
-    // return this.http.post(environment.BASE_API_URL + "user/register", payload).subscribe(
-    //   response => {
-    //     return cb(response)
-    //   }
-    // );
+    return this.http.post(environment.BASE_API_URL + "user/register", payload).subscribe(
+      response => {
+        return cb(response)
+      }
+    );
 
-    return cb({ status: 200 })
+    //return cb({ status: 200 })
   }
 
   SetSelectedUserProfile(data: string) {
@@ -31,7 +31,7 @@ export class AuthService {
     let userProfile = window.localStorage.getItem(environment.USER_PROFILE);
     if (userProfile) {
       let userProfile2 = JSON.parse(userProfile);
-      if (userProfile2 && userProfile2.data.authToken != null) {
+      if (userProfile2 && userProfile2.data && userProfile2.data.authToken) {
         return true;
       }
       else {
