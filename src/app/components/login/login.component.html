@@ -9,15 +9,22 @@
                         </a>
                     </div>
                     <div class="login-form">
-                        <form action="" method="post">
-                            <div class="form-group">
+                        <form [formGroup]="loginForm" (ngSubmit)="login()"  method="post">
+                            <div class="form-group mb-2">
                                 <label>Email Address</label>
-                                <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
+                                <input class="au-input au-input--full" type="email" formControlName="email" placeholder="Email">
+                                <div class="error-message" *ngIf="getElements('email')?.invalid && getElements('email')?.touched">
+                                    <span *ngIf="hasFormError('email', 'required')"> Please enter email. </span>
+                                    <span *ngIf="hasFormError('email', 'email')"> Please enter valid email. </span>
+                                </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <label>Password</label>
-                                <input class="au-input au-input--full" type="password" name="password"
-                                    placeholder="Password">
+                                <input class="au-input au-input--full" type="password" formControlName="password" placeholder="Password">
+                                <div class="error-message" *ngIf="getElements('password')?.invalid && getElements('password')?.touched">
+                                    <span *ngIf="hasFormError('password', 'required')"> Please enter password. </span>
+                                    <span *ngIf="hasFormError('password', 'pattern')"> Please enter valid password. </span>
+                                </div>
                             </div>
                             <div class="login-checkbox">
                                 <label>
@@ -27,7 +34,7 @@
                                     <a href="#">Forgotten Password?</a>
                                 </label>
                             </div>
-                            <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
+                            <button class="au-btn au-btn--block au-btn--green m-t-20 {{!loginForm.valid ? 'disabled' : ''}}" type="submit" [disabled]="!loginForm.valid">login</button>
                             <div class="social-login-content">
                                 <div class="social-button">
                                     <button class="au-btn au-btn--block au-btn--blue m-b-20">sign in with
@@ -39,7 +46,7 @@
                         <div class="register-link">
                             <p>
                                 Don't you have account?
-                                <a href="#">Sign Up Here</a>
+                                <a routerLink="/register" >Sign Up Here</a>
                             </p>
                         </div>
                     </div>

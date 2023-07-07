@@ -23,6 +23,14 @@ export class AuthService {
     //return cb({ status: 200 })
   }
 
+  login(payload: any, cb: any) {
+    return this.http.post(environment.BASE_API_URL + "user/login", payload).subscribe(
+      response => {
+        return cb(response)
+      }
+    );
+  }
+
   SetSelectedUserProfile(data: string) {
     return window.localStorage.setItem(environment.USER_PROFILE, data);
   }
