@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
         this.authServices.SetSelectedUserProfile(JSON.stringify(response));
         this.toastr.success('User Registered Successfully');
         this.registerForm.reset();
-        this.router.navigate(['/']);
+        this.router.navigate(['/dashboard']);
       } else if (response.hasOwnProperty('error')) {
         this.toastr.error('SignUp.user already exists');
       }

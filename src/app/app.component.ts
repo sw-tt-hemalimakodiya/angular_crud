@@ -15,4 +15,8 @@ export class AppComponent {
   ngOnInit() {
     this.isAuthanticated = this.authService.IsAuthenticated();
   }
+
+  ngDoCheck(){
+    this.isAuthanticated = this.authService.IsAuthenticated();
+  }
 }

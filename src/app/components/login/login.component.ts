@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  public isFormSubmitted: boolean = false;
   loginForm!: FormGroup
 
   constructor(private fb: FormBuilder,
@@ -34,6 +35,7 @@ export class LoginComponent {
 
   login(){
     // stop here if form is invalid
+    this.isFormSubmitted = true;
     if (this.loginForm.invalid) {
       return;
     }
@@ -44,7 +46,7 @@ export class LoginComponent {
         this.authServices.SetSelectedUserProfile(JSON.stringify(response));
         this.toastr.success('User Login Successfully');
         this.loginForm.reset();
-        this.router.navigate(['/']);
+        this.router.navigate(['/dashboard']);
       } else if (response.hasOwnProperty('error')) {
         this.toastr.error('SignUp.user already exists');
       }

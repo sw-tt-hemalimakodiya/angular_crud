@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ import { environment } from '../../environments/environment';
 export class AuthService {
   // env: any
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {
     //this.env = environment
   }
@@ -19,8 +21,6 @@ export class AuthService {
         return cb(response)
       }
     );
-
-    //return cb({ status: 200 })
   }
 
   login(payload: any, cb: any) {
@@ -48,5 +48,12 @@ export class AuthService {
     } else {
       return false;
     }
+  }
+
+  logout(){
+    window.localStorage.removeItem(environment.USER_PROFILE);
+    localStorage.clear();
+    sessionStorage.clear();
+    this.router.navigate(['/login']); 
   }
 }

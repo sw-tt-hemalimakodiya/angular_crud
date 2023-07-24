@@ -8,9 +8,10 @@ import { authGuard, notAuthGuard } from './auth/auth.guard';
 import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent,canActivate:[authGuard]},
-  { path: 'register', component: RegisterComponent, canActivate:[notAuthGuard]},
+  { path: '', component: LoginComponent,canActivate:[notAuthGuard]},
   { path: 'login', component: LoginComponent, canActivate:[notAuthGuard]},
+  { path: 'register', component: RegisterComponent, canActivate:[notAuthGuard]},
+  { path: 'dashboard', component: DashboardComponent,canActivate:[authGuard]},
   { path: 'stocks', component: StockComponent, canActivate:[authGuard]},
   { path: 'mutual-funds', component: MutualFundsComponent, canActivate:[authGuard]},
 ];

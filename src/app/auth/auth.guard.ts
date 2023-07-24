@@ -11,7 +11,8 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot,
 
 	if (!isAuthenticated) {
 		alert("Plz login first")
-		router.navigate(['/login'])
+		authService.logout();
+		return false;
 	}
 	return true;
 };
@@ -23,7 +24,8 @@ export const notAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot,
 	const isAuthenticated: boolean = authService.IsAuthenticated();
 	//const isAuthenticated: boolean = false;
 	if (isAuthenticated) {
-		router.navigate(['/']);
+		router.navigate(['/dashboard']);
+		return false;
 	}
 	return true;
 };
