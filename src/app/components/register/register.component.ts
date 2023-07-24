@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  public isFormSubmitted: boolean = false;
   registerForm!: FormGroup;
 
   constructor(private fb: FormBuilder,
@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    this.isFormSubmitted = true;
     // stop here if form is invalid
     if (this.registerForm.invalid) {
       return;
@@ -48,7 +49,7 @@ export class RegisterComponent implements OnInit {
         this.registerForm.reset();
         this.router.navigate(['/dashboard']);
       } else if (response.hasOwnProperty('error')) {
-        this.toastr.error('SignUp.user already exists');
+        this.toastr.error(response.error.message);
       }
     })
   }

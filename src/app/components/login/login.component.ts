@@ -48,7 +48,7 @@ export class LoginComponent {
         this.loginForm.reset();
         this.router.navigate(['/dashboard']);
       } else if (response.hasOwnProperty('error')) {
-        this.toastr.error('SignUp.user already exists');
+        this.toastr.error(response.error.message);
       }
     })
   }

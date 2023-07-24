@@ -19,6 +19,9 @@ export class AuthService {
     return this.http.post(environment.BASE_API_URL + "user/register", payload).subscribe(
       response => {
         return cb(response)
+      }, 
+      error => {
+        return cb(error)
       }
     );
   }
@@ -27,6 +30,9 @@ export class AuthService {
     return this.http.post(environment.BASE_API_URL + "user/login", payload).subscribe(
       response => {
         return cb(response)
+      }, 
+      error => {
+        return cb(error)
       }
     );
   }
