@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h3 class="text-center title-2">Add Category</h3>
+                </div>
+                <hr>
+                <form [formGroup]="categoryForm"  (ngSubmit)="addEditCategory()"  method="post">
+                    <div class="form-group mb-1">
+                        <label for="name" class="mb-1">Name</label>
+                        <input id="c_name" name="name" type="text" class="form-control" formControlName="name" />
+                        <div class="error-message">
+                            <span *ngIf="isFormSubmitted && hasFormError('name', 'required')"> Please enter name. </span>
+                        </div>
+                    </div>
+                    <div class="form-group mb-1">
+                        <label for="image" class="mb-1">Image</label>
+                        <input id="c_image" name="image" type="file" class="form-control" formControlName="image" >
+                    </div>
+                    <div class="form-group mb-1">
+                        <label for="description" class="mb-1">Description</label>
+                        <textarea id="c_description" name="description" rows="5" class="form-control" formControlName="description" ></textarea>
+                        <div class="error-message">
+                            <span *ngIf="isFormSubmitted && hasFormError('description', 'required')"> Please enter description. </span>
+                        </div>
+                    </div>
+                    <div class="form-group mb-1">
+                        <label for="status" class="mb-1">Status</label>
+                        <label class="switch switch-3d switch-primary mx-3"> 
+                            <input type="checkbox" class="switch-input" name="status" checked="true" formControlName="status" >
+                            <span class="switch-label"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button class="btn btn-primary me-md-1" type="button">Cancel</button>
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

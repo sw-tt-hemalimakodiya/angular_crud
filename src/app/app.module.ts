@@ -8,13 +8,14 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { StockComponent } from './components/stock/stock.component';
-import { MutualFundsComponent } from './components/mutual-funds/mutual-funds.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CategoryComponent } from './components/category/category.component';
+import { ProductComponent } from './components/product/product.component';
+import { CategoryAddEditComponent } from './components/category/category-add-edit/category-add-edit.component';
 
 @NgModule({
   declarations: [
@@ -24,9 +25,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FooterComponent,
     LoginComponent,
     DashboardComponent,
-    StockComponent,
-    MutualFundsComponent,
-    RegisterComponent
+    RegisterComponent,
+    CategoryComponent,
+    ProductComponent,
+    CategoryAddEditComponent
   ],
   imports: [
     BrowserModule,
