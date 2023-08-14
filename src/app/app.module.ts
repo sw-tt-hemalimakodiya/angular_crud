@@ -11,11 +11,12 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoryComponent } from './components/category/category.component';
 import { ProductComponent } from './components/product/product.component';
 import { CategoryAddEditComponent } from './components/category/category-add-edit/category-add-edit.component';
+import { HttpInterceptorService } from './common/HttpInterceptorService';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,14 @@ import { CategoryAddEditComponent } from './components/category/category-add-edi
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [HttpClient],
+  providers: [
+    HttpClient,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

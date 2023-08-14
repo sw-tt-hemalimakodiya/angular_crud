@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class AuthService {
   }
 
   register(payload: any, cb: any) {
-    return this.http.post(environment.BASE_API_URL + "user/register", payload).subscribe(
+    return this.http.post(environment.USER.REGISTER, payload).subscribe(
       response => {
         return cb(response)
       }, 
@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   login(payload: any, cb: any) {
-    return this.http.post(environment.BASE_API_URL + "user/login", payload).subscribe(
+    return this.http.post(environment.USER.LOGIN, payload).subscribe(
       response => {
         return cb(response)
       }, 
