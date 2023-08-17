@@ -17,6 +17,10 @@ import { CategoryComponent } from './components/category/category.component';
 import { ProductComponent } from './components/product/product.component';
 import { CategoryAddEditComponent } from './components/category/category-add-edit/category-add-edit.component';
 import { HttpInterceptorService } from './common/HttpInterceptorService';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,11 @@ import { HttpInterceptorService } from './common/HttpInterceptorService';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatSortModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule
   ],
   providers: [
     HttpClient,
