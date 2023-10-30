@@ -56,6 +56,21 @@ export class AuthService {
     }
   }
 
+  getToken() {
+    let userProfile = window.localStorage.getItem(environment.USER_PROFILE);
+    if (userProfile) {
+      let userProfile2 = JSON.parse(userProfile)
+      if (userProfile2 && userProfile2.data && userProfile2.data.authToken) {
+        return userProfile2.data.authToken;
+      } else {
+        return null;
+      }
+    }
+    else {
+      return null;
+    }
+  }
+
   logout(){
     window.localStorage.removeItem(environment.USER_PROFILE);
     localStorage.clear();

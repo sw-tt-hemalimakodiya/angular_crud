@@ -10,17 +10,18 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ToastrModule } from 'ngx-toastr';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CategoryComponent } from './components/category/category.component';
 import { ProductComponent } from './components/product/product.component';
 import { CategoryAddEditComponent } from './components/category/category-add-edit/category-add-edit.component';
 import { HttpInterceptorService } from './common/HttpInterceptorService';
-import { MatSortModule } from '@angular/material/sort';
-import { MatTableModule } from '@angular/material/table';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { ToastModule } from 'primeng/toast';
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { CategoryListComponent } from './components/category/category-list/category-list.component';
+//import { CategoryListComponent } from './category/category-list/category-list.component';
 
 @NgModule({
   declarations: [
@@ -31,9 +32,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     LoginComponent,
     DashboardComponent,
     RegisterComponent,
-    CategoryComponent,
     ProductComponent,
-    CategoryAddEditComponent
+    CategoryAddEditComponent,
+    CategoryListComponent,
+    //CategoryListComponent
   ],
   imports: [
     BrowserModule,
@@ -41,11 +43,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    MatSortModule,
-    MatTableModule,
-    MatProgressSpinnerModule,
-    MatPaginatorModule
+    ToastModule,
+    TableModule,
+    ButtonModule,
+    ConfirmDialogModule
   ],
   providers: [
     HttpClient,
@@ -53,7 +54,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
       multi: true
-    }
+    },
+    MessageService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })

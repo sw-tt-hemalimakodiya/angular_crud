@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { ToastService } from 'src/app/services/toast/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder,
     private authServices: AuthService,
-    private toastr: ToastrService,
+    private toastService: ToastService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -44,11 +44,11 @@ export class LoginComponent {
     this.authServices.login(formData, (response : any) => {
       if (response.status == 200 && !response.hasOwnProperty('error')) {
         this.authServices.SetSelectedUserProfile(JSON.stringify(response));
-        this.toastr.success('User Login Successfully');
         this.loginForm.reset();
+        this.toastService.showSuccess("User login successfully ");
         this.router.navigate(['/dashboard']);
       } else if (response.hasOwnProperty('error')) {
-        this.toastr.error(response.error.message);
+        this.toastService.showError(response.error.message);
       }
     })
   }

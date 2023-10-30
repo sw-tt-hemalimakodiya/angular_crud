@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,7 +14,6 @@ export class RegisterComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private authServices: AuthService,
-    private toastr: ToastrService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -45,11 +43,11 @@ export class RegisterComponent implements OnInit {
     this.authServices.register(formData, (response : any) => {
       if (response.status == 200 && !response.hasOwnProperty('error')) {
         this.authServices.SetSelectedUserProfile(JSON.stringify(response));
-        this.toastr.success('User Registered Successfully');
+        //this.toastr.success('User Registered Successfully');
         this.registerForm.reset();
         this.router.navigate(['/dashboard']);
       } else if (response.hasOwnProperty('error')) {
-        this.toastr.error(response.error.message);
+        //this.toastr.error(response.error.message);
       }
     })
   }

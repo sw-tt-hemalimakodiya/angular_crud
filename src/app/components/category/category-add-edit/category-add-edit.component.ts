@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/services/api/api.service';
 import { environment } from 'src/environments/environment';
+import { ToastService } from 'src/app/services/toast/toast.service';
 
 @Component({
   selector: 'app-category-add-edit',
@@ -13,11 +13,13 @@ import { environment } from 'src/environments/environment';
 export class CategoryAddEditComponent {
   public isFormSubmitted: boolean = false;
   categoryForm!: FormGroup
-  isAddMode: boolean = false;
+  isEditMode: boolean = false;
+  categoryId : any = ""
 
   constructor(private fb: FormBuilder,
-    private toastr: ToastrService,
     private router: Router,
+    private activeRoute: ActivatedRoute,
+    private toastService: ToastService,
     private apiService: ApiService){
   }
 
@@ -28,48 +30,55 @@ export class CategoryAddEditComponent {
       'description': ['', [Validators.required]],
       'status': [true],
     })
-    await this.getCategoryList();
 
-    /*this.router.queryParams.subscribe((param)=>{
-      console.log(param);
-      if(param && param['isView']){
-        this.isView = param['isView']=='false' ? false : true;
-        this.title = param['isView']=='false' ? 'Edit Coupon Code' : 'View Coupon Code'
-      }
-      if(param && param['id']){
-        this.selectedCouponId = param['id'];
-        this.getCouponDetails(this.selectedCouponId);
-        this.isAddMode = false;
-      }
-    }) */
+    this.categoryId = this.activeRoute.snapshot.paramMap.get('id');
+    if (this.categoryId) {
+      this.isEditMode = true;
+      this.getCategoryDetails(this.categoryId);
+    }
   }
 
   public hasFormError = (controlName: string, errorName: string) => {
     return this.categoryForm.controls[controlName].hasError(errorName);
   }
 
+  getCategoryDetails(id : string) {
+    this.apiService.getRequest(`${environment.CATEGORY}/categoryById/${id}`, {}, (response: any) => {
+      console.log("Response ===> ",response);
+      if (response.data) {
+        this.categoryForm.patchValue(response.data)
+      }
+    })
+  }
+
   getElements(controlName: string) {
     return this.categoryForm.get(controlName);
   }
 
-  addEditCategory(){
+  addEditCategory() {
     this.isFormSubmitted = true
     if(this.categoryForm && this.categoryForm.valid){
       console.log("form data =====> ", this.categoryForm.value);
-      this.apiService.postRequest(environment.CATEGORY, this.categoryForm.value, (response:any)=>{
-        if (response.status == 200 && !response.hasOwnProperty('error')) {
-          this.toastr.success('Category added successfully');
-          this.router.navigate(['/dashboard']);
-        } else if (response.hasOwnProperty('error')) {
-          this.toastr.error(response.error.message);
-        }
-      })
-    }
-  }
 
-  getCategoryList(){
-    this.apiService.getRequest(`${environment.CATEGORY}/list`, {}, (response : any)=> {
-      console.log("response ===> ", response);
-    })
+      if (this.isEditMode) {
+        this.apiService.putRequest(`${environment.CATEGORY}/${this.categoryId}`, this.categoryForm.value, {}, (response : any) => {
+          if (response.status == 200 && !response.hasOwnProperty('error')) {
+            this.toastService.showSuccess("Category Updated successfully");
+            this.router.navigate(['/category']);
+          } else if (response.hasOwnProperty('error')) {
+            this.toastService.showError(response.error.message);
+          }
+        })
+      } else {
+        this.apiService.postRequest(environment.CATEGORY, this.categoryForm.value, (response:any)=>{
+          if (response.status == 200 && !response.hasOwnProperty('error')) {
+            this.toastService.showSuccess("Category added successfully");
+            this.router.navigate(['/category']);
+          } else if (response.hasOwnProperty('error')) {
+            this.toastService.showError(response.error.message);
+          }
+        })
+      }
+    }
   }
 }

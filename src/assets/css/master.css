@@ -40,13 +40,13 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
 /*                   GENERIC                           */
 /*-----------------------------------------------------*/
 /* ----- Normalize ----- */
-* {
+/* * {
     margin: 0;
     padding: 0;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-}
+} */
 
 ul {
     margin: 0;
@@ -67,10 +67,10 @@ input, textarea {
     border: none;
 }
 
-button {
+/* button {
     border: none;
     background: none;
-}
+} */
 
 img {
     max-width: 100%;
@@ -268,11 +268,11 @@ section {
 
 /* ----- Page Wrapper----- */
 /*Override Grid Bootstrap*/
-@media (min-width: 1200px) {
+/* @media (min-width: 1200px) {
     .container {
         max-width: 1320px;
     }
-}
+} */
 
 /*Page Objects*/
 .page-wrapper {
