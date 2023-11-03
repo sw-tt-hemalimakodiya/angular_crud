@@ -44,7 +44,6 @@ export class CategoryAddEditComponent {
 
   getCategoryDetails(id : string) {
     this.apiService.getRequest(`${environment.CATEGORY}/categoryById/${id}`, {}, (response: any) => {
-      console.log("Response ===> ",response);
       if (response.data) {
         this.categoryForm.patchValue(response.data)
       }

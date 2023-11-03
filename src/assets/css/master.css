@@ -67,10 +67,10 @@ input, textarea {
     border: none;
 }
 
-/* button {
+button {
     border: none;
-    background: none;
-} */
+    /* background: none; */
+}
 
 img {
     max-width: 100%;

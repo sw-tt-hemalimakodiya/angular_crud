@@ -21,7 +21,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { CategoryListComponent } from './components/category/category-list/category-list.component';
-//import { CategoryListComponent } from './category/category-list/category-list.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +33,7 @@ import { CategoryListComponent } from './components/category/category-list/categ
     RegisterComponent,
     ProductComponent,
     CategoryAddEditComponent,
-    CategoryListComponent,
-    //CategoryListComponent
+    CategoryListComponent
   ],
   imports: [
     BrowserModule,
