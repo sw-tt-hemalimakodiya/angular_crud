@@ -16,7 +16,7 @@
                     </div>
                     <div class="form-group mb-1">
                         <label for="image" class="mb-1">Image</label>
-                        <input id="c_image" name="image" type="file" class="form-control" formControlName="image" >
+                        <input id="c_image" name="image" type="file" class="form-control" formControlName="image" (change)="onFileChange($event)" >
                     </div>
                     <div class="form-group mb-1">
                         <label for="description" class="mb-1">Description</label>

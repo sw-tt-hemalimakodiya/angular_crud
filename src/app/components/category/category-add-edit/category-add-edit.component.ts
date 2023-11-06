@@ -54,13 +54,29 @@ export class CategoryAddEditComponent {
     return this.categoryForm.get(controlName);
   }
 
+  onFileChange(event:any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.categoryForm.patchValue({
+        image: file
+      });
+    }
+  }
+
   addEditCategory() {
     this.isFormSubmitted = true
     if(this.categoryForm && this.categoryForm.valid){
-      console.log("form data =====> ", this.categoryForm.value);
+      const formData = new FormData();
+      formData.append("name", this.getElements('name')?.value);
+      formData.append("image", this.getElements('image')?.value);
+      formData.append("description", this.getElements('description')?.value);
+      formData.append("status", this.getElements('status')?.value);
+
+      console.log("formData =====> ", typeof(formData.get('status')));
+      
 
       if (this.isEditMode) {
-        this.apiService.putRequest(`${environment.CATEGORY}/${this.categoryId}`, this.categoryForm.value, {}, (response : any) => {
+        this.apiService.putRequest(`${environment.CATEGORY}/${this.categoryId}`, formData, {}, (response : any) => {
           if (response.status == 200 && !response.hasOwnProperty('error')) {
             this.toastService.showSuccess("Category Updated successfully");
             this.router.navigate(['/category']);
@@ -69,7 +85,7 @@ export class CategoryAddEditComponent {
           }
         })
       } else {
-        this.apiService.postRequest(environment.CATEGORY, this.categoryForm.value, (response:any)=>{
+        this.apiService.postRequest(environment.CATEGORY, formData, (response:any)=>{
           if (response.status == 200 && !response.hasOwnProperty('error')) {
             this.toastService.showSuccess("Category added successfully");
             this.router.navigate(['/category']);
