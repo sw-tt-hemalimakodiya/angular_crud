@@ -1,26 +1,27 @@
+// angular import
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// project import
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LayoutComponent } from './components/layout/layout.component';
-import { TopbarComponent } from './components/layout/topbar/topbar.component';
-import { SidebarComponent } from './components/layout/sidebar/sidebar.component';
-import { FooterComponent } from './components/layout/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AlertComponent } from './components/alert/alert.component';
+import { ModelComponent } from './components/model/model.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LayoutComponent,
-    TopbarComponent,
-    SidebarComponent,
-    FooterComponent
+    AlertComponent,
+    ModelComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    BrowserModule, 
+    AppRoutingModule, 
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

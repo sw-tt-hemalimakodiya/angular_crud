@@ -1,14 +1,28 @@
+// angular import
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LayoutComponent } from './components/layout/layout.component';
+
+// Project import
+import LoginComponent from './pages/login/login.component';
+import RegisterComponent from './pages/register/register.component';
 
 const routes: Routes = [
-  { path:'', component: LayoutComponent},
-  { path: 'auth', loadChildren : () => import('./components/auth/auth.module').then(m => m.AuthModule)}
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule)
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

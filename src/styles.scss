@@ -1,15 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
-/* You can add global styles to this file, and also import other style files */
+/**======================================================================
+=========================================================================
+Template Name: DashboardKit - Most Complete Bootstrap Admin Template
+Author: Phoenixcoded
+Support: support@phoenixcoded.net
+File: style.css
+=========================================================================
+=================================================================================== */
 
-$gutter: 1rem; //for primeflex grid system
-@import "assets/layout/styles/layout/layout.scss";
+// main framework
+@import 'scss/settings/preset-variables';
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+$pc-body-bg: map-get($preset-colors, 'preset-1', 'body');
+$pc-blue: map-get($preset-colors, 'preset-1', 'primary');
+$pc-secondary: map-get($preset-colors, 'preset-1', 'secondary');
+@import 'scss/settings/custom-variables';
+@import 'scss/settings/theme-variables';
 
-/* PrimeNG */
-@import "../node_modules/primeng/resources/primeng.min.css";
-@import "../node_modules/primeflex/primeflex.scss";
-@import "../node_modules/primeicons/primeicons.css";
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap/scss/utilities';
+@import 'node_modules/bootstrap/scss/utilities/api';
 
-/* Demos */
-@import "assets/demo/styles/flags/flags.css";
-@import "assets/demo/styles/badges.scss";
-@import "assets/demo/styles/code.scss";
+// main framework
+@import 'scss/themes/generic';
+@import 'scss/themes/general';
+
+// menu
+@import 'scss/menu/menu-lite';
+
+// Layouts
+@import 'scss/themes/layouts/layouts.scss';
+
+// Componants
+@import 'scss/themes/components/components';
+
+// pages
+@import 'scss/themes/pages/page';
+
+// font
+@import 'scss/fonts/tabler-icons.min.css';

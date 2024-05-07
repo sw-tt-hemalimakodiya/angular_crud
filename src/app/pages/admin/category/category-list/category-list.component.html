@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-11 col-xl-11 text-end">
+    <a routerLink="/admin/category/add"><button class="btn btn-info mb-2">Add</button></a>
+  </div>
+</div>
+
+<div class="row category-list">
+  <div class="col-md-11 col-xl-11">
+    <div class="card tbl-card">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered mb-0 category-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>IMAGE</th>
+                <th>STATUS</th>
+                <th>CREATE DATE</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (category of categotyList; track category) {
+              <tr class="category-row">
+                <td>
+                  <a href="javascript:" class="text-muted">{{ category._id }}</a>
+                </td>
+                <td>{{ category.name }}</td>
+                <td>{{ category.image }}</td>
+                <td>
+                  <span class="d-block">
+                    <i class="{{ category.status === 1 ? 'ti ti-circle-check text-success' : 'ti ti-circle-x text-danger' }} m-r-5"></i>
+                    {{ category.status === 1 ? 'Active' : 'Inactive'}}
+                  </span>
+                </td>
+                <td>{{ category.createdAt | date : 'dd/MM/YYYY, hh:mm:ss a' }}</td>
+                <td class="action">
+                  <span class="d-block">
+                    <a routerLink="/admin/category/view/{{category._id}}"><i class="ti ti-eye pe-2 text-info"></i></a>
+                    <a routerLink="/admin/category/edit/{{category._id}}"><i class="ti ti-edit pe-2 text-warning"></i></a>
+                    <a href="javascript:void(0)"  (click)="openConfirmationDialog(category._id)"><i class="ti ti-trash text-danger"></i></a>
+                  </span>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
