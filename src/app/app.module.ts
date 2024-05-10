@@ -9,12 +9,14 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './components/alert/alert.component';
 import { ModelComponent } from './components/model/model.component';
+import LoginComponent from './pages/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AlertComponent,
-    ModelComponent
+    ModelComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule, 
