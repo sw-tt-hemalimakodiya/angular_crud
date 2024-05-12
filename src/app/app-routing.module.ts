@@ -5,19 +5,23 @@ import { RouterModule, Routes } from '@angular/router';
 // Project import
 import LoginComponent from './pages/login/login.component';
 import RegisterComponent from './pages/register/register.component';
+import { authGuard, notAuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate:[notAuthGuard]
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate:[notAuthGuard]
   },
   {
     path: 'admin',
-    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule)
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
+    canActivate:[authGuard]
   }
 ];
 

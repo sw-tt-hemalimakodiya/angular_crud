@@ -1,8 +1,9 @@
 // angular import
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlertService } from 'src/app/components/alert/alert.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export default class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private alertService: AlertService,
-    // private authServices: AuthService,
+    private authServices: AuthService,
     private router: Router
   ) { }
 
@@ -39,16 +40,20 @@ export default class LoginComponent implements OnInit {
     }
 
     const formData = this.loginForm.value
-    this.authServices.login(formData, (response : any) => {
-      if (response.status == 200 && !response.hasOwnProperty('error')) {
+    this.authServices.login(formData, (response) => {
+      if (response.status == 200) {
         this.authServices.SetSelectedUserProfile(JSON.stringify(response));
         this.loginForm.reset();
         this.alertService.success(`User login successfully`, { autoClose: true, keepAfterRouteChange: true })
-        this.router.navigate(['/dashboard']);
-      } else if (response.hasOwnProperty('error')) {
+        this.router.navigate(['/admin']);
+      } else {
         this.alertService.error(response.error.message, { autoClose: true, keepAfterRouteChange: true });
       }
     })
+  }
+
+  getElements(controlName: string) {
+    return this.loginForm.get(controlName);
   }
 
   // public method

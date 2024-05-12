@@ -46,7 +46,7 @@ export class AlertComponent implements OnInit, OnDestroy {
 
     // clear alerts on location change
     this.routeSubscription = this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
+      if (event instanceof NavigationStart && event.url !== '/login') {
         this.alertService.clear(this.id);
       }
     });

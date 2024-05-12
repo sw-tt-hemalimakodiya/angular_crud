@@ -7,7 +7,7 @@
       <div class="form-group mb-3">
         <label class="form-label" for="name">Name</label>
         <input formControlName="name" type="name" class="form-control" id="name" placeholder="Category Name" />
-        <div class="error" *ngIf="(submitted && name.invalid)">
+        <div class="error" *ngIf="((submitted || name?.dirty || name?.touched) && name.invalid)">
           Please provide a valid name.
         </div>
       </div>
