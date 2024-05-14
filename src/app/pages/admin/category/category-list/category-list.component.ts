@@ -28,8 +28,10 @@ export class CategoryListComponent {
 
   getCategoryList() {
     this.categoryServices.getCategory({}, (response) => {
-      if (response.data) {
+      if (response.status === 200 && response.data) {
         this.categotyList = response.data;
+      } else {
+        console.log('Error while fetching category =====', response);
       }
     })
   }

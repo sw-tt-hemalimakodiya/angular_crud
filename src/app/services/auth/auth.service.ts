@@ -27,7 +27,6 @@ export class AuthService {
   }
 
   login(payload, cb) {
-    console.log("inside login function ====", this.login_url);
     return this.http.post(this.login_url, payload).subscribe(
       response => {
         return cb(response)
@@ -38,12 +37,16 @@ export class AuthService {
     );
   }
 
-  SetSelectedUserProfile(data: string) {
-    return window.localStorage.setItem(environment.USER_PROFILE, data);
+  SetSelectedUserProfile(data: string, remeberMe: boolean) {
+    if (remeberMe) {
+      return window.localStorage.setItem(environment.USER_PROFILE, data);
+    } else {
+      return window.sessionStorage.setItem(environment.USER_PROFILE, data);
+    }
   }
 
   IsAuthenticated() {
-    const userProfile = window.localStorage.getItem(environment.USER_PROFILE);
+    const userProfile = window.localStorage.getItem(environment.USER_PROFILE) || window.sessionStorage.getItem(environment.USER_PROFILE);
     if (userProfile) {
       const userProfile2 = JSON.parse(userProfile);
       if (userProfile2 && userProfile2.data && userProfile2.data.authToken) {
@@ -58,7 +61,7 @@ export class AuthService {
   }
 
   getToken() {
-    const userProfile = window.localStorage.getItem(environment.USER_PROFILE);
+    const userProfile = window.localStorage.getItem(environment.USER_PROFILE) || window.sessionStorage.getItem(environment.USER_PROFILE);
     if (userProfile) {
       const userProfile2 = JSON.parse(userProfile)
       if (userProfile2 && userProfile2.data && userProfile2.data.authToken) {
@@ -74,6 +77,7 @@ export class AuthService {
 
   logout(){
     window.localStorage.removeItem(environment.USER_PROFILE);
+    window.sessionStorage.removeItem(environment.USER_PROFILE);
     localStorage.clear();
     sessionStorage.clear();
     this.router.navigate(['/login']); 

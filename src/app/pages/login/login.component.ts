@@ -23,16 +23,17 @@ export default class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      'email': ['', [Validators.required, Validators.email]],
-      'password': ['', [Validators.required, Validators.pattern(/^[a-zA-Z][a-zA-Z0-9]/)]],
+      'email': ['', [Validators.required, Validators.pattern(/^[A-Za-z0-9._]+@[A-Za-z0-9.-]+\.[a-z]{2,3}$/)]],
+      'password': ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]{6,}$/)]],
+      'remeberMe': [true],
     })
   }
 
-  public hasFormError = (controlName: string, errorName: string) => {
+  hasFormError = (controlName: string, errorName: string) => {
     return this.loginForm.controls[controlName].hasError(errorName);
   }
 
-  login(){
+  login() {
     // stop here if form is invalid
     this.isFormSubmitted = true;
     if (this.loginForm.invalid) {
@@ -42,7 +43,7 @@ export default class LoginComponent implements OnInit {
     const formData = this.loginForm.value
     this.authServices.login(formData, (response) => {
       if (response.status == 200) {
-        this.authServices.SetSelectedUserProfile(JSON.stringify(response));
+        this.authServices.SetSelectedUserProfile(JSON.stringify(response), formData.remeberMe);
         this.loginForm.reset();
         this.alertService.success(`User login successfully`, { autoClose: true, keepAfterRouteChange: true })
         this.router.navigate(['/admin']);

@@ -1,5 +1,8 @@
 // angular import
 import { Component } from '@angular/core';
+import { AlertService } from '../../alert/alert.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-right',
@@ -8,6 +11,19 @@ import { Component } from '@angular/core';
 })
 export class NavRightComponent {
   // public method
+
+  constructor(
+    private alertService: AlertService,
+    private authServices: AuthService,
+    private router: Router
+  ) { }
+
+  logout() {
+    this.authServices.logout();
+    this.alertService.success('Logout Successfully', { autoClose: true, keepAfterRouteChange: true });
+    this.router.navigate(['/login']);
+  }
+
   profile = [
     {
       icon: 'ti ti-edit-circle',
