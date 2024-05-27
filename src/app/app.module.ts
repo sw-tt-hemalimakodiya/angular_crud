@@ -12,13 +12,15 @@ import { ModelComponent } from './components/model/model.component';
 import LoginComponent from './pages/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { jwtInterceptor } from './interceptors/jwt.interceptor';
+import RegisterComponent from './pages/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AlertComponent,
     ModelComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
