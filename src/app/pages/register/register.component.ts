@@ -52,8 +52,6 @@ export default class RegisterComponent implements OnInit {
         this.registerForm.reset();
         this.alertService.success(`User registered successfully`, { autoClose: true, keepAfterRouteChange: true })
         this.router.navigate(['/login']);
-      } else {
-        this.alertService.error(response.error.message, { autoClose: true, keepAfterRouteChange: true });
       }
     })
   }

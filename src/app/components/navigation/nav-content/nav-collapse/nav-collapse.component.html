@@ -1,9 +1,12 @@
 <li data-username="mantis free dashboard" class="nav-item coded-hasmenu" [routerLinkActive]="['active']">
   <a [routerLinkActive]="['active']" href="javascript:" class="nav-link" (click)="navCollapse($event)">
     @if (item.icon) {
-      <span class="coded-micon">
-        <i class="{{ item.icon }}"></i>
-      </span>
+      <span class="coded-micon"><i class="" [ngClass]="item.icon"></i></span>
+    }
+    @if (item.icon) {
+      <span class="coded-mtext">{{ item.title }}</span>
+    } @else {
+      {{ item.title }}
     }
   </a>
   <ul class="coded-submenu" [routerLinkActive]="['active']" [ngClass]="item.classes!">

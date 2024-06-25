@@ -35,7 +35,7 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
         // Handle non-HTTP errors
         console.error('An error occurred:', err);
       }
-      alertService.error(`HTTP error: ${err.error.message || err.message}`, { autoClose: true, keepAfterRouteChange: true })
+      alertService.error(`${err.error.message || err.message}`, { autoClose: true, keepAfterRouteChange: true })
       // Re-throw the error to propagate it further
       return throwError(() => err);
     })

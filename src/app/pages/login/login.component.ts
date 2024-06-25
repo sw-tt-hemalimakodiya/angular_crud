@@ -47,8 +47,6 @@ export default class LoginComponent implements OnInit {
         this.loginForm.reset();
         this.alertService.success(`User login successfully`, { autoClose: true, keepAfterRouteChange: true })
         this.router.navigate(['/admin']);
-      } else {
-        this.alertService.error(response.error.message, { autoClose: true, keepAfterRouteChange: true });
       }
     })
   }

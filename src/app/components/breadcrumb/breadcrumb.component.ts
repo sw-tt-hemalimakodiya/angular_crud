@@ -46,6 +46,8 @@ export class BreadcrumbComponent {
       if (router instanceof NavigationEnd) {
         const activeLink = router.url;
         const breadcrumbList = this.filterNavigation(this.navigations, activeLink);
+        console.log('breadcrumbList ==== ', breadcrumbList);
+        
         this.navigationList = breadcrumbList;
         this.componentList = this.filterNavigation(this.ComponentNavigations, activeLink);
         const title = breadcrumbList[breadcrumbList.length - 1]?.title || 'Welcome';
@@ -58,6 +60,7 @@ export class BreadcrumbComponent {
     if (navItems && navItems.length > 0) {
       for (const navItem of navItems) {
         if (navItem.type === 'item' && 'url' in navItem && navItem.url === activeLink) {
+          console.log('inside item ====');
           return [
             {
               url: 'url' in navItem ? navItem.url : false,
@@ -68,6 +71,7 @@ export class BreadcrumbComponent {
           ];
         }
         if ((navItem.type === 'group' || navItem.type === 'collapse') && 'children' in navItem) {
+          console.log('inside group or collapse ====');
           // eslint-disable-next-line
           const breadcrumbList = this.filterNavigation(navItem.children!, activeLink);
           if (breadcrumbList.length > 0) {

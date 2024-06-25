@@ -81,6 +81,7 @@ export const NavigationItems: NavigationItem[] = [
             id: 'add_category',
             title: 'Add',
             type: 'item',
+            hidden: true,
             url: '/admin/category/add',
             classes: 'nav-item',
             icon: 'ti ti-brand-chrome'

@@ -25,7 +25,7 @@ export class CategoryAddEditComponent implements OnInit {
   ngOnInit() {
     this.categoryFrom = this.fb.group({
       name: ['', [Validators.required]],
-      status: ['', [Validators.required]],
+      status: [''],
     });
 
     // For edit and view operation take Id
