@@ -15,15 +15,24 @@ const routes: Routes = [
       },
       {
         path: 'add',
-        component: CategoryAddEditComponent
+        component: CategoryAddEditComponent,
+        data: {
+          breadcrumb: 'Add',
+        }
       },
       {
         path: 'edit/:id',
-        component: CategoryAddEditComponent
+        component: CategoryAddEditComponent,
+        data: {
+          breadcrumb: 'Edit',
+        }
       },
       {
         path: 'view/:id',
-        component: CategoryAddEditComponent
+        component: CategoryAddEditComponent,
+        data: {
+          breadcrumb: 'View',
+        }
       }
     ]
   },

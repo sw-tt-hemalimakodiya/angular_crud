@@ -15,7 +15,8 @@ export const environment = {
     REGISTER: "user/register",
     LOGIN: "user/login"
   },
-  CATEGORY: "category"
+  CATEGORY: "category",
+  PRODUCT: "product"
 };
 
 /*

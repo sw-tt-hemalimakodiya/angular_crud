@@ -1,20 +1,7 @@
 // Angular import
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NavigationEnd, Router, RouterModule, Event } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-
-// project import
-import { NavigationItem, NavigationItems } from '../navigation/navigation';
-
-interface titleType {
-  // eslint-disable-next-line
-  url: string | boolean | any;
-  title: string;
-  breadcrumbs: unknown;
-  type: string;
-}
-
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IBreadCrumb } from './breadcrumb.interface';
 @Component({
   selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html',
@@ -23,69 +10,46 @@ interface titleType {
 
 export class BreadcrumbComponent {
   // public props
-  @Input() type: string;
-  navigations: NavigationItem[];
-  ComponentNavigations: NavigationItem[];
-  breadcrumbList: Array<string> = [];
-  navigationList!: titleType[];
-  componentList!: titleType[];
+  public breadcrumbs: IBreadCrumb[]
 
   // constructor
   constructor(
-    private route: Router,
-    private titleService: Title
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
-    this.navigations = NavigationItems;
-    this.type = 'theme1';
-    this.setBreadcrumb();
+    this.breadcrumbs = this.buildBreadCrumb(this.activatedRoute.root);
   }
 
-  // public method
-  setBreadcrumb() {
-    this.route.events.subscribe((router: Event) => {
-      if (router instanceof NavigationEnd) {
-        const activeLink = router.url;
-        const breadcrumbList = this.filterNavigation(this.navigations, activeLink);
-        console.log('breadcrumbList ==== ', breadcrumbList);
-        
-        this.navigationList = breadcrumbList;
-        this.componentList = this.filterNavigation(this.ComponentNavigations, activeLink);
-        const title = breadcrumbList[breadcrumbList.length - 1]?.title || 'Welcome';
-        this.titleService.setTitle(title + ' | Mantis  Angular Admin Template');
-      }
-    });
+  ngOnInit() {
+    this.router.events.pipe().subscribe(() => {
+      this.breadcrumbs = this.buildBreadCrumb(this.activatedRoute.root);
+    })
   }
 
-  filterNavigation(navItems: NavigationItem[], activeLink: string): titleType[] {
-    if (navItems && navItems.length > 0) {
-      for (const navItem of navItems) {
-        if (navItem.type === 'item' && 'url' in navItem && navItem.url === activeLink) {
-          console.log('inside item ====');
-          return [
-            {
-              url: 'url' in navItem ? navItem.url : false,
-              title: navItem.title,
-              breadcrumbs: 'breadcrumbs' in navItem ? navItem.breadcrumbs : true,
-              type: navItem.type
-            }
-          ];
-        }
-        if ((navItem.type === 'group' || navItem.type === 'collapse') && 'children' in navItem) {
-          console.log('inside group or collapse ====');
-          // eslint-disable-next-line
-          const breadcrumbList = this.filterNavigation(navItem.children!, activeLink);
-          if (breadcrumbList.length > 0) {
-            breadcrumbList.unshift({
-              url: 'url' in navItem ? navItem.url : false,
-              title: navItem.title,
-              breadcrumbs: 'breadcrumbs' in navItem ? navItem.breadcrumbs : true,
-              type: navItem.type
-            });
-            return breadcrumbList;
-          }
-        }
-      }
+  buildBreadCrumb(route: ActivatedRoute, url: string = '', breadcrumbs: IBreadCrumb[] = []): IBreadCrumb[] {
+    //If no routeConfig is avalailable we are on the root path
+    let label = route.routeConfig && route.routeConfig.data ? route.routeConfig.data['breadcrumb'] : '';
+    let path = route.routeConfig && route.routeConfig.data ? route.routeConfig.path : '';
+
+    // If the route is dynamic route such as ':id', remove it
+    const lastRoutePart = path.split('/').pop();
+    const isDynamicRoute = lastRoutePart.startsWith(':');
+    if (isDynamicRoute && !!route.snapshot) {
+      const paramName = lastRoutePart.split(':')[1];
+      path = path.replace(lastRoutePart, route.snapshot.params[paramName]);
+      label = route.snapshot.params[paramName];
     }
-    return [];
+
+    const nextUrl = path ? `${url}/${path}` : url;
+    const breadcrumb: IBreadCrumb = {
+      label: label,
+      url: nextUrl,
+    };
+    // Only adding route with non-empty label
+    const newBreadcrumbs = breadcrumb.label ? [...breadcrumbs, breadcrumb] : [...breadcrumbs];
+    if (route.firstChild) {
+      return this.buildBreadCrumb(route.firstChild, nextUrl, newBreadcrumbs);
+    }
+    return newBreadcrumbs;
   }
 }

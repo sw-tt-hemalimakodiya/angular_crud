@@ -11,7 +11,7 @@ import { CategoryService } from 'src/app/services/category/category.service';
   styleUrl: './category-list.component.scss'
 })
 export class CategoryListComponent {
-  categotyList = []
+  categoryList = []
 
   constructor(
     private categoryServices: CategoryService,
@@ -29,7 +29,7 @@ export class CategoryListComponent {
   getCategoryList() {
     this.categoryServices.getCategory({}, (response) => {
       if (response.status === 200 && response.data) {
-        this.categotyList = response.data;
+        this.categoryList = response.data;
       } else {
         console.log('Error while fetching category =====', response);
       }
@@ -41,8 +41,10 @@ export class CategoryListComponent {
       .then((confirmed) => { 
         if (confirmed) {
           this.categoryServices.deleteCategory(id, response => {
-            this.alertService.success(`Category deleted successfully : ${response.data.id}`, { autoClose: true, keepAfterRouteChange: true })
-            this.getCategoryList()
+            if (response.status === 200) {
+              this.alertService.success(`Category deleted successfully : ${response.data.id}`, { autoClose: true, keepAfterRouteChange: true })
+              this.getCategoryList()
+            }
           })
         }
       })

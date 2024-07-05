@@ -11,19 +11,28 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: ProductListComponent,
+        component: ProductListComponent
       },
       {
         path: 'add',
-        component: ProductAddEditComponent
+        component: ProductAddEditComponent,
+        data: {
+          breadcrumb: 'Add',
+        }
       },
       {
         path: 'edit/:id',
-        component: ProductAddEditComponent
+        component: ProductAddEditComponent,
+        data: {
+          breadcrumb: 'Edit',
+        }
       },
       {
         path: 'view/:id',
-        component: ProductAddEditComponent
+        component: ProductAddEditComponent,
+        data: {
+          breadcrumb: 'View',
+        }
       }
     ]
   },

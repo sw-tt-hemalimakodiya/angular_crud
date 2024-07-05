@@ -14,7 +14,7 @@ export class CategoryAddEditComponent implements OnInit {
   submitted = false
   id: string;
   isAddMode: boolean = true;
-  isViewMode : boolean = false
+  isViewMode: boolean = false
 
   constructor(private fb: FormBuilder,
     private categoryServices: CategoryService,
@@ -64,19 +64,19 @@ export class CategoryAddEditComponent implements OnInit {
 
   editCategory(id) {
     this.categoryServices.editCategory(id, this.categoryFrom.value, response => {
-      this.alertService.success(`Category updated successfully : ${response.data.id}`, { autoClose: true, keepAfterRouteChange: true })
-      this.router.navigate(['admin/category']);
+      if (response.status === 200 && response.data) {
+        this.alertService.success(`Category updated successfully : ${response.data.id}`, { autoClose: true, keepAfterRouteChange: true })
+        this.router.navigate(['admin/category']);
+      }
     })
   }
 
   addCategory() {
     this.categoryServices.addCategory(this.categoryFrom.value, (response) => {
-      this.alertService.success(`Category added successfully : ${response.data.id}`, { autoClose: true, keepAfterRouteChange: true })
-      this.router.navigate(['admin/category']);
+      if (response.status === 200 && response.data) {
+        this.alertService.success(`Category added successfully : ${response.data.id}`, { autoClose: true, keepAfterRouteChange: true })
+        this.router.navigate(['admin/category']);
+      }
     })
-  }
-
-  deleteCategory(id) {
-    console.log('delete category === ', id);
   }
 }

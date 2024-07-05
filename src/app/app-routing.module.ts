@@ -11,17 +11,20 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    canActivate:[notAuthGuard]
+    canActivate: [notAuthGuard]
   },
   {
     path: 'register',
     component: RegisterComponent,
-    canActivate:[notAuthGuard]
+    canActivate: [notAuthGuard]
   },
   {
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
-    canActivate:[authGuard]
+    canActivate: [authGuard],
+    data: {
+      breadcrumb: 'Dashboard',
+    },
   }
 ];
 
@@ -29,4 +32,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

@@ -5,12 +5,12 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
-  url : string = `${environment.BASE_API_URL}${environment.CATEGORY}`
+export class ProductService {
+  url : string = `${environment.BASE_API_URL}${environment.PRODUCT}`
 
   constructor(private http: HttpClient) { }
 
-  getCategory(params, cb) {
+  getProduct(params, cb) {
     return this.http.get(this.url, {params}).subscribe(
       response => {
         return cb(response)
@@ -21,7 +21,7 @@ export class CategoryService {
     );
   }
 
-  addCategory(body, cb) {
+  addProduct(body, cb) {
     return this.http.post(this.url, body).subscribe(
       response => {
         return cb(response)
@@ -32,7 +32,7 @@ export class CategoryService {
     );
   }
 
-  getCategoryById(id, cb) {
+  getProductById(id, cb) {
     return this.http.get(`${this.url}/${id}`).subscribe(
       response => {
         return cb(response)
@@ -43,7 +43,7 @@ export class CategoryService {
     );
   }
 
-  deleteCategory(id, cb) {
+  deleteProduct(id, cb) {
     return this.http.delete(`${this.url}/${id}`).subscribe(
       response => {
         return cb(response)
@@ -54,7 +54,7 @@ export class CategoryService {
     );
   }
 
-  editCategory(id, body, cb) {
+  editProduct(id, body, cb) {
     return this.http.put(`${this.url}/${id}`, body).subscribe(
       response => {
         return cb(response)

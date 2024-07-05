@@ -10,7 +10,6 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot,
   const router = inject(Router);
   const isAuthenticated: boolean = authService.IsAuthenticated();
   //const isAuthenticated: boolean = false;
-  console.log('Inside auth guard');
   if (!isAuthenticated) {
     alertService.error('Please login first', { autoClose: true, keepAfterRouteChange: true })
     authService.logout();
@@ -18,7 +17,6 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot,
     return false;
   }
   return true;
-  
 };
 
 export const notAuthGuard: CanActivateFn = (route: ActivatedRouteSnapshot,
